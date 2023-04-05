@@ -1,0 +1,21 @@
+name: mit-game-build-windows
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build the game
+        run: |
+          cmake -DBUILD_SHARED_LIBS=False -S . -B ./Build
+          cmake --build Build --parallel
+

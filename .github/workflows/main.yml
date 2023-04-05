@@ -1,0 +1,21 @@
+name: mit-game-build
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches: [ "*" ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-ubuntu:
+    uses: ./.github/workflows/build-ubuntu.yml
+
+  build-macos:
+    uses: ./.github/workflows/build-macos.yml
+
+  build-windows:
+    uses: ./.github/workflows/build-windows.yml

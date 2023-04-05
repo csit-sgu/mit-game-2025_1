@@ -1,0 +1,17 @@
+name: mit-game-build-macos
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build the game
+        run: |
+          ./maker.sh build
+

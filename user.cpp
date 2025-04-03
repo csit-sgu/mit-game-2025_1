@@ -463,7 +463,11 @@ void DrawMainScreen(Context &ctx) {}
 //
 // Возможное решение может занимать примерно N строк.
 //
-void ConstructMenuScene(Context &ctx, Scene &game_scene) {}
+void ConstructMenuScene(Context &ctx, Scene &game_scene) {
+    Object bg = Object();
+    bg.render = Render(ctx, "Assets/menu_background2.png", ctx.screen_size);
+    game_scene.push_back(bg);
+}
 
 // Задание DrawStatus.
 //

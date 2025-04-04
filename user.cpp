@@ -445,6 +445,23 @@ bool IsMouseOnButton(Rectangle btn) {
     return CheckCollisionPointRec(mousePoint, btn);
 }
 
+void ChangeButtonState(Context &ctx, Rectangle btnCollider, size_t btn_id, std::string path1, std::string path2) {
+    if (IsMouseOnButton(btnCollider)) {
+        for (auto &obj : ctx.current_scene) {
+            if (obj.id == btn_id) {
+                obj.render = Render(ctx, path2, Vector2(200.0f, 80.0f));
+            }
+        }
+    }
+    else {
+        for (auto &obj : ctx.current_scene) {
+            if (obj.id == btn_id) {
+                obj.render = Render(ctx, path1, Vector2(200.0f, 80.0f));
+            }
+        }
+    }
+}
+
 // Задание ConstructMenuScene.
 //
 // Функция создаёт объекты в сцене главного меню. Свобода фантазии!
@@ -474,6 +491,7 @@ void ConstructMenuScene(Context &ctx, Scene &game_scene) {
     game_scene.push_back(bg);
 
     Object startBtn = Object();
+    startBtn.id = 1;
     startBtn.render = Render(ctx, "Assets/start_button_1.png", Vector2(200.0f, 80.0f));
     startBtn.position = Vector2(0.0f, 2.0f);
     game_scene.push_back(startBtn);

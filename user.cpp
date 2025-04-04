@@ -440,6 +440,11 @@ void DrawFinishScreen(Context &ctx) {}
 //
 void DrawMainScreen(Context &ctx) {}
 
+bool IsMouseOnButton(Rectangle btn) {
+    Vector2 mousePoint = GetMousePosition();
+    return CheckCollisionPointRec(mousePoint, btn);
+}
+
 // Задание ConstructMenuScene.
 //
 // Функция создаёт объекты в сцене главного меню. Свобода фантазии!
@@ -467,6 +472,11 @@ void ConstructMenuScene(Context &ctx, Scene &game_scene) {
     Object bg = Object();
     bg.render = Render(ctx, "Assets/menu_background2.png", ctx.screen_size);
     game_scene.push_back(bg);
+
+    Object startBtn = Object();
+    startBtn.render = Render(ctx, "Assets/start_button_1.png", Vector2(200.0f, 80.0f));
+    startBtn.position = Vector2(0.0f, 2.0f);
+    game_scene.push_back(startBtn);
 }
 
 // Задание DrawStatus.

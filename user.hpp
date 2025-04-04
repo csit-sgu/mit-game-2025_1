@@ -22,4 +22,5 @@ void DrawGameOverScreen(Context &);
 void ApplyOnDeath(Context &, Object &);
 void ApplyOnSpawn(Context &, Object &);
 void DrawStatus(Context &);
+bool IsMouseOnButton(Rectangle btn);
 void ConstructMenuScene(Context &ctx, Scene &game_scene);

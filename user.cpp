@@ -449,14 +449,14 @@ void ChangeButtonState(Context &ctx, Rectangle btnCollider, size_t btn_id, std::
     if (IsMouseOnButton(btnCollider)) {
         for (auto &obj : ctx.current_scene) {
             if (obj.id == btn_id) {
-                obj.render = Render(ctx, path2, Vector2(200.0f, 80.0f));
+                obj.render = Render(ctx, path2, Vector2(btnCollider.width, btnCollider.height));
             }
         }
     }
     else {
         for (auto &obj : ctx.current_scene) {
             if (obj.id == btn_id) {
-                obj.render = Render(ctx, path1, Vector2(200.0f, 80.0f));
+                obj.render = Render(ctx, path1, Vector2(btnCollider.width, btnCollider.height));
             }
         }
     }
@@ -492,8 +492,8 @@ void ConstructMenuScene(Context &ctx, Scene &game_scene) {
 
     Object startBtn = Object();
     startBtn.id = 1;
-    startBtn.render = Render(ctx, "Assets/start_button_1.png", Vector2(200.0f, 80.0f));
-    startBtn.position = Vector2(0.0f, 2.0f);
+    startBtn.render = Render(ctx, "Assets/start_button1.png", Vector2(200.0f, 50.0f));
+    startBtn.position = Vector2(-5.0f, 0);
     game_scene.push_back(startBtn);
 }
 

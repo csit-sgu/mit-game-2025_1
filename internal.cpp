@@ -89,9 +89,9 @@ void UpdateGameState(Context &ctx) {
         ctx.input_blocked = true;
         ctx.camera_pos = {0, 0};
 
-        Rectangle startBtnCollider = {ctx.screen_size.x/2.0f - 100, ctx.screen_size.y/2.0f - 100, 200, 80};
+        Rectangle startBtnCollider = {ctx.screen_size.x/2.0f - 250, ctx.screen_size.y/2.0f - 25, 200, 50};
 
-        ChangeButtonState(ctx, startBtnCollider, 1, "Assets/start_button.png", "Assets/start_button_hover.png");
+        ChangeButtonState(ctx, startBtnCollider, 1, "Assets/start_button1.png", "Assets/start_button2.png");
 
         if (IsKeyPressed(KEY_ENTER) || (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseOnButton(startBtnCollider))) {
             ctx.state = GameState::IS_ALIVE;

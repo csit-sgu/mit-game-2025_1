@@ -89,7 +89,7 @@ void UpdateGameState(Context &ctx) {
         ctx.input_blocked = true;
         ctx.camera_pos = {0, 0};
 
-        Rectangle startBtnCollider = {ctx.screen_size.x/2.0f - 100, ctx.screen_size.y/2.0f - 80, 200, 80};
+        Rectangle startBtnCollider = {ctx.screen_size.x/2.0f - 100, ctx.screen_size.y/2.0f - 100, 200, 80};
 
         ChangeButtonState(ctx, startBtnCollider, 1, "Assets/start_button_1.png", "Assets/start_button_2.png");
 

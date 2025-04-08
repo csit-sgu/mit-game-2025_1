@@ -1,5 +1,4 @@
 #include "user.hpp"
-#include "Libraries/raylib/src/raylib.h"
 #include "internal.hpp"
 
 #include <raymath.h>

@@ -492,8 +492,8 @@ void ConstructMenuScene(Context &ctx, Scene &game_scene) {
 
     Object startBtn = Object();
     startBtn.id = 1;
-    startBtn.render = Render(ctx, "Assets/start_button1.png", Vector2(200.0f, 50.0f));
-    startBtn.position = Vector2(-5.0f, 0);
+    startBtn.render = Render(ctx, "Assets/start_button1.png", Vector2(200, 50));
+    startBtn.position = Vector2(-5, 0);
     game_scene.push_back(startBtn);
 }
 

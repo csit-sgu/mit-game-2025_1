@@ -445,18 +445,27 @@ bool IsMouseOnButton(Rectangle btn) {
     return CheckCollisionPointRec(mousePoint, btn);
 }
 
-void ChangeButtonState(Context &ctx, Rectangle btnCollider, size_t btn_id, std::string path1, std::string path2) {
+void ChangeButtonState(
+    Context &ctx,
+    Rectangle btnCollider,
+    size_t btn_id,
+    std::string path1,
+    std::string path2
+) {
     if (IsMouseOnButton(btnCollider)) {
         for (auto &obj : ctx.current_scene) {
             if (obj.id == btn_id) {
-                obj.render = Render(ctx, path2, Vector2(btnCollider.width, btnCollider.height));
+                obj.render = Render(
+                    ctx, path2, Vector2(btnCollider.width, btnCollider.height)
+                );
             }
         }
-    }
-    else {
+    } else {
         for (auto &obj : ctx.current_scene) {
             if (obj.id == btn_id) {
-                obj.render = Render(ctx, path1, Vector2(btnCollider.width, btnCollider.height));
+                obj.render = Render(
+                    ctx, path1, Vector2(btnCollider.width, btnCollider.height)
+                );
             }
         }
     }

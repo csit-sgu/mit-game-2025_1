@@ -23,7 +23,20 @@
 // Ваше решение может сильно отличаться.
 //
 Collision CheckCollision(Object &obj1, Object &obj2) {
-    return Collision{};
+    Vector2 d = {
+        abs(obj1.position.x - obj2.position.x),
+        abs(obj1.position.y - obj2.position.y)
+    };
+    Vector2 q = {
+        d.x - (obj1.collider.width + obj2.collider.width) / 2,
+        d.y - (obj1.collider.height + obj2.collider.height) / 2
+    };
+
+    if(q.x < 0 && q.y < 0) {
+        return Collision{true, q};
+    }
+
+    return Collision{false, {0, 0}};
 }
 
 // Задание SolveCollision.

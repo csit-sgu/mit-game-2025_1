@@ -440,6 +440,37 @@ void DrawFinishScreen(Context &ctx) {}
 //
 void DrawMainScreen(Context &ctx) {}
 
+bool IsMouseOnButton(Rectangle btn) {
+    Vector2 mousePoint = GetMousePosition();
+    return CheckCollisionPointRec(mousePoint, btn);
+}
+
+void ChangeButtonState(
+    Context &ctx,
+    Rectangle btnCollider,
+    size_t btn_id,
+    std::string path1,
+    std::string path2
+) {
+    if (IsMouseOnButton(btnCollider)) {
+        for (auto &obj : ctx.current_scene) {
+            if (obj.id == btn_id) {
+                obj.render = Render(
+                    ctx, path2, Vector2(btnCollider.width, btnCollider.height)
+                );
+            }
+        }
+    } else {
+        for (auto &obj : ctx.current_scene) {
+            if (obj.id == btn_id) {
+                obj.render = Render(
+                    ctx, path1, Vector2(btnCollider.width, btnCollider.height)
+                );
+            }
+        }
+    }
+}
+
 // Задание ConstructMenuScene.
 //
 // Функция создаёт объекты в сцене главного меню. Свобода фантазии!
@@ -463,7 +494,17 @@ void DrawMainScreen(Context &ctx) {}
 //
 // Возможное решение может занимать примерно N строк.
 //
-void ConstructMenuScene(Context &ctx, Scene &game_scene) {}
+void ConstructMenuScene(Context &ctx, Scene &game_scene) {
+    Object bg = Object();
+    bg.render = Render(ctx, "Assets/menu_background2.png", ctx.screen_size);
+    game_scene.push_back(bg);
+
+    Object startBtn = Object();
+    startBtn.id = 1;
+    startBtn.render = Render(ctx, "Assets/start_button1.png", Vector2(200, 50));
+    startBtn.position = Vector2(-5, 0);
+    game_scene.push_back(startBtn);
+}
 
 // Задание DrawStatus.
 //

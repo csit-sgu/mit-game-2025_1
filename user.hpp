@@ -22,4 +22,6 @@ void DrawGameOverScreen(Context &);
 void ApplyOnDeath(Context &, Object &);
 void ApplyOnSpawn(Context &, Object &);
 void DrawStatus(Context &);
+bool IsMouseOnButton(Rectangle btn);
+void ChangeButtonState(Context &ctx, Rectangle btnCollider, size_t btn_id, std::string path1, std::string path2);
 void ConstructMenuScene(Context &ctx, Scene &game_scene);

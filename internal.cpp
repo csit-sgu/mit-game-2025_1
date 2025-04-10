@@ -88,7 +88,12 @@ void UpdateGameState(Context &ctx) {
     case GameState::MAIN_MENU: {
         ctx.input_blocked = true;
         ctx.camera_pos = {0, 0};
-        if (IsKeyPressed(KEY_ENTER)) {
+
+        Rectangle startBtnCollider = {ctx.screen_size.x/2.0f - 250, ctx.screen_size.y/2.0f - 25, 200, 50};
+
+        ChangeButtonState(ctx, startBtnCollider, 1, "Assets/start_button1.png", "Assets/start_button2.png");
+
+        if (IsKeyPressed(KEY_ENTER) || (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseOnButton(startBtnCollider))) {
             ctx.state = GameState::IS_ALIVE;
             ctx.current_scene = ctx.scenes["game"];
             ctx.lives = 3;

@@ -119,7 +119,7 @@ void CreateObjectFromChar(
         wall1.position = Vector2{col, row} * scale_factor;
         wall1.render = Render(
             ctx,
-            "Assets/wall1.png",
+            "Assets/floor.png",
             Vector2{PIXEL_PER_UNIT, PIXEL_PER_UNIT} * scale_factor
         );
         wall1.collider = Collider(wall1.render);
@@ -130,7 +130,7 @@ void CreateObjectFromChar(
         wall1.position = Vector2{col, row} * scale_factor;
         wall1.render = Render(
             ctx,
-            "Assets/wall2.png",
+            "Assets/ceiling.png",
             Vector2{PIXEL_PER_UNIT, PIXEL_PER_UNIT} * scale_factor
         );
         wall1.collider = Collider(wall1.render);
@@ -141,7 +141,18 @@ void CreateObjectFromChar(
         wall1.position = Vector2{col, row} * scale_factor;
         wall1.render = Render(
             ctx,
-            "Assets/wall3.png",
+            "Assets/filler.png",
+            Vector2{PIXEL_PER_UNIT, PIXEL_PER_UNIT} * scale_factor
+        );
+        wall1.collider = Collider(wall1.render);
+        scene.push_back(std::move(wall1));
+    } break;
+    case '|': {
+        Object wall1 = Object();
+        wall1.position = Vector2{col, row} * scale_factor;
+        wall1.render = Render(
+            ctx,
+            "Assets/wall.png",
             Vector2{PIXEL_PER_UNIT, PIXEL_PER_UNIT} * scale_factor
         );
         wall1.collider = Collider(wall1.render);

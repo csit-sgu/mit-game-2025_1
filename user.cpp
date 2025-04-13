@@ -212,12 +212,12 @@ bool CheckFinish(Object &player, Scene &scene) {
 // Возможное решение может занимать примерно 16-20 строк.
 // Ваше решение может сильно отличаться.
 //
-void EnemyAI(Object &enemy, Scene &scene, float dt)
-{
+void EnemyAI(Object &enemy, Scene &scene, float dt) {
     Object *player = find_player(scene);
 
-    if (!player)
+    if (!player) {
         return;
+    }
 
     float dx = enemy.position.x - player->position.x;
     float move = enemy.enemy.speed * dt;

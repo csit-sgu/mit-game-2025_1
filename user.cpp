@@ -30,7 +30,9 @@ Collision CheckCollision(Object &obj1, Object &obj2) {
     };
 
     return q.x < 0 && q.y < 0 ? 
-    Collision{true, {d.x < 0 ? abs(q.x): q.x, d.y < 0 ? abs(q.y): q.y}}:
+    Collision{true, {
+        d.x < 0 ? -abs(q.x): abs(q.x),
+        d.y < 0 ? -abs(q.y): abs(q.y)}}:
     Collision{false, {0, 0}};
 }
 

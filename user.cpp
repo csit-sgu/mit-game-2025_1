@@ -46,25 +46,20 @@ Collision CheckCollision(Object &obj1, Object &obj2) {
 // Возможное решение может занимать примерно 14-20 строк.
 // Ваше решение может сильно отличаться.
 //
+
 void SolveCollision(Object &obj, Collision c, float dt) {
     if (!c.exists) {
         return;
     }
-    if (std::abs(c.overlap.x) > std::abs(c.overlap.y)) {
-        if (c.overlap.x < 0) {
-            obj.position.x -= c.overlap.x;
-        } else {
-            obj.position.x += c.overlap.x;
-        }
+    if (std::abs(c.overlap.x) < std::abs(c.overlap.y)) {
+        obj.position.x -= c.overlap.x;
     } else {
+        obj.position.y += c.overlap.y;
+        obj.physics.speed.y = 0;
+
         if (c.overlap.y < 0) {
-            obj.position.y += c.overlap.y;
             obj.physics.acceleration.y = 0;
-            obj.physics.speed.y = 0;
             obj.physics.can_jump = true;
-        } else {
-            obj.position.y -= c.overlap.y;
-            obj.physics.speed.y = 0;
         }
     }
 }

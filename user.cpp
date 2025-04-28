@@ -111,8 +111,8 @@ void FixCollisions(Scene &scene, float dt) {}
 //
 void ApplyGravity(Object &obj, float dt) {
     if (obj.physics.enabled && obj.collider.of_type(ColliderType::DYNAMIC)) {
-        obj.physics.acceleration.y += GRAVITY / (dt * dt);
-        obj.physics.speed.y -= obj.physics.acceleration.y;
+        obj.physics.acceleration.y -= GRAVITY / (dt * dt);
+        obj.physics.speed.y += obj.physics.acceleration.y;
         if (obj.physics.speed.y < -200) {
             obj.physics.speed.y = -200;
         }

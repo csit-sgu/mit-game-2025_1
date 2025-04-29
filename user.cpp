@@ -243,7 +243,7 @@ void EnemyAI(Object &enemy, Scene &scene, float dt) {}
 // Ваше решение может сильно отличаться.
 //
 void PlayerControl(Context &ctx, Object &player, float dt) {
-	//Выполняется только в том случае, если ввод не заблокирован (возможно нужно добавить в условие && player.player.enabled )
+	//Выполняется только в том случае, если ввод не заблокирован
     if (!ctx.input_blocked) {
         Vector2 move = {0, 0};
 

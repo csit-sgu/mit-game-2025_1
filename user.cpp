@@ -532,4 +532,67 @@ void ConstructMenuScene(Context &ctx, Scene &game_scene) {
 //
 // Возможное решение может занимать примерно N строк.
 //
-void DrawStatus(Context &ctx) {}
+void DrawStatus(Context &ctx) {
+    const int panelHeight = 100;
+    const Color panelColor = {0, 96, 158};
+
+    RenderTexture2D statusPanel = LoadRenderTexture(800, panelHeight);
+
+    BeginTextureMode(statusPanel);
+    ClearBackground(BLANK);
+    DrawRectangle(0, 0, 800, panelHeight, panelColor);
+
+    Texture heartTexture = ctx.textures_storage[ctx.heart->hash];
+    const float heartSize = 50.0f;
+    const float heartSpacing = 10.0f;
+    const float heartYPos = (panelHeight - heartSize) / 2;
+
+    for (int i = 0; i < ctx.lives; i++) {
+        DrawTextureV(
+            heartTexture,
+            Vector2{15 + i * (heartSize + heartSpacing), heartYPos},
+            WHITE
+        );
+    }
+
+    std::string scoreText = "SCORE: " + std::to_string(ctx.score);
+    int scoreFontSize = 30;
+    int scoreTextWidth = MeasureText(scoreText.c_str(), scoreFontSize);
+    DrawText(
+        scoreText.c_str(),
+        800 - scoreTextWidth - 20,
+        (panelHeight - scoreFontSize) / 2,
+        scoreFontSize,
+        WHITE
+    );
+
+    int totalSeconds = ctx.time / 1000;
+    int minutes = totalSeconds / 60;
+    int seconds = totalSeconds % 60;
+    std::string timeText = "TIME: " + (minutes < 10 ? "0" : "")
+                         + std::to_string(minutes) + ":"
+                         + (seconds < 10 ? "0" : "") + std::to_string(seconds);
+    int timeFontSize = 30;
+    int timeTextWidth = MeasureText(timeText.c_str(), timeFontSize);
+    DrawText(
+        timeText.c_str(),
+        (800 - timeTextWidth) / 2,
+        (panelHeight - timeFontSize) / 2,
+        timeFontSize,
+        WHITE
+    );
+
+    EndTextureMode();
+
+    DrawTextureRec(
+        statusPanel.texture,
+        Rectangle{
+            0,
+            0,
+            (float) statusPanel.texture.width,
+            (float) -statusPanel.texture.height
+        },
+        Vector2{0, 0},
+        WHITE
+    );
+}

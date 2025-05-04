@@ -82,7 +82,22 @@ void SolveCollision(Object &obj, Collision c, float dt) {}
 // Возможное решение может занимать примерно 14-20 строк.
 // Ваше решение может сильно отличаться.
 //
-void FixCollisions(Scene &scene, float dt) {}
+void FixCollisions(Scene &scene, float dt) {
+    for (Object &obj1 : scene) {
+        if (obj1.collider.enabled &&
+            obj1.collider.of_type(ColliderType::DYNAMIC)) {
+            for (Object &obj2 : scene) {
+                if (obj1 == obj2) continue;
+                if (obj2.collider.enabled &&
+                    (obj2.collider.of_type(ColliderType::DYNAMIC) ||
+                     obj2.collider.of_type(ColliderType::STATIC))) {
+                    Collision c = CheckCollision(obj1, obj2);
+                    SolveCollision(obj1, c, dt);
+                }
+            }
+        }
+    }
+}
 
 // Задание ApplyGravity.
 //

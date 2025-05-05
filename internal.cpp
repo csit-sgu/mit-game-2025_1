@@ -96,6 +96,8 @@ void UpdateGameState(Context &ctx) {
         if (IsKeyPressed(KEY_ENTER) || (IsMouseButtonDown(MOUSE_BUTTON_LEFT) && IsMouseOnButton(startBtnCollider))) {
             ctx.state = GameState::IS_ALIVE;
             ctx.current_scene = ctx.scenes["game"];
+            Object &player = *find_player(ctx.current_scene);
+            ctx.camera_pos = player.position;
             ctx.lives = 3;
             ctx.score = 0;
             ctx.time = 0;

@@ -555,7 +555,7 @@ void DrawStatus(Context &ctx) {
         );
     }
 
-    std::string scoreText = "SCORE: " + std::to_string(ctx.score);
+    std::string scoreText = std::string("SCORE: ") + std::to_string(ctx.score);
     int scoreFontSize = 30;
     int scoreTextWidth = MeasureText(scoreText.c_str(), scoreFontSize);
     DrawText(
@@ -569,7 +569,7 @@ void DrawStatus(Context &ctx) {
     int totalSeconds = ctx.time / 1000;
     int minutes = totalSeconds / 60;
     int seconds = totalSeconds % 60;
-    std::string timeText = "TIME: " + (minutes < 10 ? "0" : "")
+    std::string timeText = std::string("TIME: ") + (minutes < 10 ? "0" : "")
                          + std::to_string(minutes) + ":"
                          + (seconds < 10 ? "0" : "") + std::to_string(seconds);
     int timeFontSize = 30;

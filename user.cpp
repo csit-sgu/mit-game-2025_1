@@ -23,7 +23,17 @@
 // Ваше решение может сильно отличаться.
 //
 Collision CheckCollision(Object &obj1, Object &obj2) {
-    return Collision{};
+    Vector2 d = obj2.position - obj1.position;
+    Vector2 q = {
+        abs(d.x) - (obj1.collider.width + obj2.collider.width) / 2,
+        abs(d.y) - (obj1.collider.height + obj2.collider.height) / 2
+    };
+
+    return q.x < 0 && q.y < 0 ? 
+    Collision{true, {
+        d.x < 0 ? -abs(q.x): abs(q.x),
+        d.y < 0 ? -abs(q.y): abs(q.y)}}:
+    Collision{false, {0, 0}};
 }
 
 // Задание SolveCollision.
@@ -212,7 +222,24 @@ bool CheckFinish(Object &player, Scene &scene) {
 // Возможное решение может занимать примерно 16-20 строк.
 // Ваше решение может сильно отличаться.
 //
-void EnemyAI(Object &enemy, Scene &scene, float dt) {}
+void EnemyAI(Object &enemy, Scene &scene, float dt) {
+    Object *player = find_player(scene);
+
+    if (!player) {
+        return;
+    }
+
+    float dx = enemy.position.x - player->position.x;
+    float move = enemy.enemy.speed * dt;
+
+    if (dx > 0) {
+        enemy.position.x -= move;
+        enemy.player.direction = Direction::LEFT;
+    } else if (dx < 0) {
+        enemy.position.x += move;
+        enemy.player.direction = Direction::RIGHT;
+    }
+}
 
 // Задание PlayerControl.
 //

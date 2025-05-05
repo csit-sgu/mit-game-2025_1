@@ -405,7 +405,12 @@ void ApplyOnDeath(Context &ctx, Object &obj) {}
 //
 // Возможное решение может занимать примерно 3 строки.
 //
-void ApplyOnSpawn(Context &ctx, Object &obj) {}
+void ApplyOnSpawn(Context &ctx, Object &obj) {
+    if (obj.bullet.enabled) {
+        Sound shot = LoadSound("Assets/Sounds/shot.mp3");
+        PlaySound(shot);
+    }
+}
 
 // Задание DrawDeathScreen.
 //

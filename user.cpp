@@ -24,16 +24,13 @@
 //
 Collision CheckCollision(Object &obj1, Object &obj2) {
     Vector2 d = obj2.position - obj1.position;
-    Vector2 q = {
-        abs(d.x) - (obj1.collider.width + obj2.collider.width) / 2,
-        abs(d.y) - (obj1.collider.height + obj2.collider.height) / 2
-    };
+    Vector2 q
+        = {abs(d.x) - (obj1.collider.width + obj2.collider.width) / 2,
+           abs(d.y) - (obj1.collider.height + obj2.collider.height) / 2};
 
-    return q.x < 0 && q.y < 0 ? 
-    Collision{true, {
-        d.x < 0 ? -abs(q.x): abs(q.x),
-        d.y < 0 ? -abs(q.y): abs(q.y)}}:
-    Collision{false, {0, 0}};
+    return q.x < 0 && q.y < 0
+             ? Collision{true, {d.x < 0 ? -abs(q.x) : abs(q.x), d.y < 0 ? -abs(q.y) : abs(q.y)}}
+             : Collision{false, {0, 0}};
 }
 
 // Задание SolveCollision.
@@ -358,7 +355,22 @@ void UpdateBullet(Context &ctx, Object &obj, float dt) {}
 //
 // Возможное решение может занимать примерно 14-20 строк.
 //
-void KillEnemies(Context &ctx) {}
+void KillEnemies(Context &ctx) {
+    for (Object &enemy_obj : ctx.current_scene) {
+        if (enemy_obj.enemy.enabled) {
+            for (Object &bullet_obj : ctx.current_scene) {
+                if (bullet_obj.bullet.enabled) {
+                    Collision n = CheckCollision(enemy_obj, bullet_obj);
+                    if (n.exists) {
+                        Destroy(ctx, enemy_obj);
+                        Destroy(ctx, bullet_obj);
+                        ApplyOnDeath(ctx, bullet_obj);
+                    }
+                }
+            }
+        }
+    }
+}
 
 // Задание ApplyOnDeath.
 //

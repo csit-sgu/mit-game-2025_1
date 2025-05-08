@@ -24,16 +24,13 @@
 //
 Collision CheckCollision(Object &obj1, Object &obj2) {
     Vector2 d = obj2.position - obj1.position;
-    Vector2 q = {
-        abs(d.x) - (obj1.collider.width + obj2.collider.width) / 2,
-        abs(d.y) - (obj1.collider.height + obj2.collider.height) / 2
-    };
+    Vector2 q
+        = {abs(d.x) - (obj1.collider.width + obj2.collider.width) / 2,
+           abs(d.y) - (obj1.collider.height + obj2.collider.height) / 2};
 
-    return q.x < 0 && q.y < 0 ? 
-    Collision{true, {
-        d.x < 0 ? -abs(q.x): abs(q.x),
-        d.y < 0 ? -abs(q.y): abs(q.y)}}:
-    Collision{false, {0, 0}};
+    return q.x < 0 && q.y < 0
+             ? Collision{true, {d.x < 0 ? -abs(q.x) : abs(q.x), d.y < 0 ? -abs(q.y) : abs(q.y)}}
+             : Collision{false, {0, 0}};
 }
 
 // Задание SolveCollision.
@@ -383,7 +380,13 @@ void KillEnemies(Context &ctx) {}
 //
 // Возможное решение может занимать примерно 6-8 строк.
 //
-void ApplyOnDeath(Context &ctx, Object &obj) {}
+void ApplyOnDeath(Context &ctx, Object &obj) {
+    if (obj.player && obj.player.enabled) {
+        PlaySound(LoadSound("Assets/Sounds/death.mp3"));
+    } else if (obj.enemy && obj.enemy.enabled) {
+        PlaySound(LoadSound("Assets/Sounds/enemy_death.mp3"));
+    }
+}
 
 // Задание ApplyOnSpawn.
 //

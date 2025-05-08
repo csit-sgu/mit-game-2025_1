@@ -453,7 +453,30 @@ void DrawGameOverScreen(Context &ctx) {}
 //
 // Возможное решение может занимать примерно N строк.
 //
-void DrawFinishScreen(Context &ctx) {}
+void DrawFinishScreen(Context &ctx) {
+    DrawRectangleGradientH(100, 150, ctx.screen_size.x - 200,
+                        ctx.screen_size.y - 300, BLACK, DARKGRAY);
+
+    const char* win_text = "LEVEL COMPLETE!";
+    const char* out_text = "Press ENTER to return to Main Menu";
+
+    int win_text_width = MeasureText(win_text, 40);
+    int out_text_width = MeasureText(out_text, 20);
+
+    DrawText(win_text, ctx.screen_size.x / 2 - win_text_width / 2,
+            ctx.screen_size.y / 2 - 50, 40, Fade(GOLD, 0.8f));
+
+    DrawText(out_text, ctx.screen_size.x / 2 - out_text_width / 2,
+            ctx.screen_size.y / 2 + 20, 20, Fade(GRAY, 0.8f));
+
+    int statsY = ctx.screen_size.y / 2 + 110;
+    int stats_size = 25;
+    std::string stats_text = "TOTAL SCORE: " + std::to_string(ctx.score);
+    int text_width = MeasureText(stats_text.c_str(), stats_size);
+
+    DrawText(stats_text.c_str(), ctx.screen_size.x / 2 - text_width / 2, statsY,
+            stats_size, Fade(WHITE, 0.5f));
+}
 
 // Задание DrawMainScreen.
 //

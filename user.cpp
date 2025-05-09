@@ -421,7 +421,17 @@ void ApplyOnSpawn(Context &ctx, Object &obj) {}
 //
 // Возможное решение может занимать примерно N строк.
 //
-void DrawDeathScreen(Context &ctx) {}
+void DrawDeathScreen(Context &ctx) {
+    DrawRectangle(0, 0, ctx.screen_size.x, ctx.screen_size.y, Fade(BLACK, 0.7f));
+
+    const char* you_died = "YOU DIED!";
+    
+    int text_width = MeasureText(you_died, 40);
+    DrawText(you_died, 
+             ctx.screen_size.x/2 - text_width/2, 
+             ctx.screen_size.y/2 - 30, 
+             40, RED);
+}
 
 // Задание DrawGameOverScreen.
 //

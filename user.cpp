@@ -24,16 +24,13 @@
 //
 Collision CheckCollision(Object &obj1, Object &obj2) {
     Vector2 d = obj2.position - obj1.position;
-    Vector2 q = {
-        abs(d.x) - (obj1.collider.width + obj2.collider.width) / 2,
-        abs(d.y) - (obj1.collider.height + obj2.collider.height) / 2
-    };
+    Vector2 q
+        = {abs(d.x) - (obj1.collider.width + obj2.collider.width) / 2,
+           abs(d.y) - (obj1.collider.height + obj2.collider.height) / 2};
 
-    return q.x < 0 && q.y < 0 ? 
-    Collision{true, {
-        d.x < 0 ? -abs(q.x): abs(q.x),
-        d.y < 0 ? -abs(q.y): abs(q.y)}}:
-    Collision{false, {0, 0}};
+    return q.x < 0 && q.y < 0
+             ? Collision{true, {d.x < 0 ? -abs(q.x) : abs(q.x), d.y < 0 ? -abs(q.y) : abs(q.y)}}
+             : Collision{false, {0, 0}};
 }
 
 // Задание SolveCollision.
@@ -437,7 +434,23 @@ void DrawDeathScreen(Context &ctx) {}
 //
 // Возможное решение может занимать примерно N строк.
 //
-void DrawGameOverScreen(Context &ctx) {}
+void DrawGameOverScreen(Context &ctx) {
+    const char *text = "GAME OVER";
+    int fontSize = 50;
+    int textWidth = MeasureText(text, fontSize);
+    Vector2 textPos
+        = {GetScreenWidth() / 2 - textWidth / 2,
+           GetScreenHeight() / 2 - fontSize / 2};
+    DrawRectangle(
+        0, 0, GetScreenWidth(), GetScreenHeight(), (Color){15, 5, 10, 240}
+    );
+    DrawText(text, textPos.x, textPos.y, fontSize, (Color){200, 70, 80, 255});
+    DrawRectangleLinesEx(
+        (Rectangle){8, 8, GetScreenWidth() - 16, GetScreenHeight() - 16},
+        1,
+        (Color){80, 20, 30, 255}
+    );
+}
 
 // Задание DrawFinishScreen.
 //

@@ -119,8 +119,16 @@ void FixCollisions(Scene &scene, float dt) {}
 // Возможное решение может занимать примерно 8-9 строки.
 // Ваше решение может сильно отличаться.
 //
-void ApplyGravity(Object &obj, float dt) {}
-
+void ApplyGravity(Object &obj, float dt) {
+    if (obj.physics.enabled && obj.collider.of_type(ColliderType::DYNAMIC)) {
+        obj.physics.acceleration.y -= GRAVITY * (dt * dt);
+        obj.physics.speed.y += obj.physics.acceleration.y;
+        if (obj.physics.speed.y < -200) {
+            obj.physics.speed.y = -200;
+        }
+        obj.position.y += obj.physics.speed.y * dt;
+    }
+}
 // Задание MakeJump.
 //
 // Эта функция вызывается при нажатии на кнопку прыжка (пробел). Необходимо
